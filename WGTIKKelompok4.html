@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+            background-color: bisque;
+        }
+    </style>
+</head>
+<body>
+    <h1>OUTPUT ADA DI CONSOLE LOG</h1>
+    <p style="font-size: larger; color: blue;"> TUGAS WGTIK - TUGAS GITHUB</p>
+    <p> MUHAMMAD FADJAR AL FARISYI (1303223168)</p>
+    <p> FIKRI ALBAR AL GHIFARI (1303223168)</p>
+    <p> FADHIL RAKA AULIA RAHMAN (1303223168)</p>
+    <script>
+            function kenaRazia(date, data) {
+            var ganjilGenapRoutes = [
+            "Gajah Mada",
+            "Hayam Wuruk",
+            "Sisingamangaraja",
+            "Panglima Polim",
+            "Fatmawati",
+            "Tomang Raya"
+            ];
+        
+            // Menentukan apakah tanggal ganjil atau genap
+            var isDateOdd = date % 2 !== 0;
+        
+            // Hasil
+            var result = [];
+        
+            // Iterasi melalui data kendaraan
+            for (var i = 0; i < data.length; i++) {
+            var vehicle = data[i];
+            
+            // Hanya memeriksa mobil
+            if (vehicle.type === "Mobil") {
+                // Mengambil digit terakhir dari plat nomor
+                var platNumber = vehicle.plat.match(/\d/g).join("");
+                var lastDigit = parseInt(platNumber[platNumber.length - 1]);
+                var isPlatOdd = lastDigit % 2 !== 0;
+                
+                var violationCount = 0;
+                var routesViolated = [];
+        
+                // Iterasi melalui rute kendaraan
+                for (var j = 0; j < vehicle.rute.length; j++) {
+                var route = vehicle.rute[j];
+                
+                // Memeriksa apakah rute termasuk rute ganjil genap
+                for (var k = 0; k < ganjilGenapRoutes.length; k++) {
+                    if (route === ganjilGenapRoutes[k]) {
+                    // Memeriksa apakah terjadi pelanggaran
+                    if (isDateOdd !== isPlatOdd) {
+                        violationCount++;
+                        routesViolated.push(route);
+                    }
+                    }
+                }
+                }
+        
+                if (violationCount > 0) {
+                result.push({
+                    name: vehicle.name,
+                    pelanggaran: violationCount,
+                    rute: routesViolated
+                });
+                }
+            }
+            }
+        
+            return result;
+        }
+        
+        console.log(
+            kenaRazia(27, [
+            {
+                name: "Denver",
+                plat: "B 2791 KDS",
+                type: "Mobil",
+                rute: ["TB Simatupang", "Panglima Polim", "Depok", "Senen Raya"]
+            },
+            {
+                name: "Toni",
+                plat: "B 1212 JBB",
+                type: "Mobil",
+                rute: [
+                "Pintu Besar Selatan",
+                "Panglima Polim",
+                "Depok",
+                "Senen Raya",
+                "Kemang"
+                ]
+            },
+            {
+                name: "Stark",
+                plat: "B 444 XSX",
+                type: "Motor",
+                rute: ["Pondok Indah", "Depok", "Senen Raya", "Kemang"]
+            },
+            {
+                name: "Anna",
+                plat: "B 678 DD",
+                type: "Mobil",
+                rute: [
+                "Fatmawati",
+                "Panglima Polim",
+                "Depok",
+                "Senen Raya",
+                "Kemang",
+                "Gajah Mada"
+                ]
+            }
+            ])
+        );
+    </script>
+</body>
+</html>
