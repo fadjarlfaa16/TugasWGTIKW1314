@@ -27,35 +27,20 @@
             "Fatmawati",
             "Tomang Raya"
             ];
-        
-            // Menentukan apakah tanggal ganjil atau genap
             var isDateOdd = date % 2 !== 0;
-        
-            // Hasil
             var result = [];
-        
-            // Iterasi melalui data kendaraan
             for (var i = 0; i < data.length; i++) {
             var vehicle = data[i];
-            
-            // Hanya memeriksa mobil
             if (vehicle.type === "Mobil") {
-                // Mengambil digit terakhir dari plat nomor
                 var platNumber = vehicle.plat.match(/\d/g).join("");
                 var lastDigit = parseInt(platNumber[platNumber.length - 1]);
                 var isPlatOdd = lastDigit % 2 !== 0;
-                
                 var violationCount = 0;
                 var routesViolated = [];
-        
-                // Iterasi melalui rute kendaraan
                 for (var j = 0; j < vehicle.rute.length; j++) {
                 var route = vehicle.rute[j];
-                
-                // Memeriksa apakah rute termasuk rute ganjil genap
                 for (var k = 0; k < ganjilGenapRoutes.length; k++) {
                     if (route === ganjilGenapRoutes[k]) {
-                    // Memeriksa apakah terjadi pelanggaran
                     if (isDateOdd !== isPlatOdd) {
                         violationCount++;
                         routesViolated.push(route);
@@ -73,7 +58,6 @@
                 }
             }
             }
-        
             return result;
         }
         
